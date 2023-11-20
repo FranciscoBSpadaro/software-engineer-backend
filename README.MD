@@ -39,13 +39,16 @@ Processamento de transações com as seguintes informações:
    - Aqui estão os passos:
    - Primeiro, você precisa instalar o Docker em seu sistema, se ainda não o fez. Você pode baixá-lo do site oficial do Docker.
    - Em seguida, você pode executar o seguinte comando no terminal powershell para criar e iniciar um contêiner Docker com PostgreSQL:
-   - docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+   - docker run --name api-pagamentos -e POSTGRES_PASSWORD=sua_senha_postgres -d -p 5432:5432 postgres
+   - Depois criar o banco de dados no servidor PostgreSQL
+   - docker exec -it api-pagamentos psql -U postgres -c "CREATE DATABASE nome_do_seu_banco_de_dados;"
+   - o usuario padrão para login no db é postgres
 7. Crie seu arquivo .env
 ```
 DB_HOST=localhost
 DB_PORT=5432
 DB_DATABASE=nome_do_seu_banco_de_dados
-DB_USERNAME=seu_usuario_postgres
+DB_USERNAME=postgres
 DB_PASSWORD=sua_senha_postgres
 ```
 
