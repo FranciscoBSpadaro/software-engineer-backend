@@ -70,6 +70,8 @@ Execute os testes com `npm test`
 - GET `/balance` - para consultar o saldo do cliente
 - Rotas disponibilizadas no arquivo insomnia na raiz do projeto
 
+## Status : Work in progress
+
 ## Contribuição
 
 Este é um projeto aberto. Sinta-se à vontade para contribuir.
