@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../../app');
+const app = require('../../app');
 
 // Descrevendo o grupo de testes para o TransactionsController
 describe('TransactionsController', () => {

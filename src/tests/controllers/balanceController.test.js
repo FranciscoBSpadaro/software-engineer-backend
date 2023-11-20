@@ -1,6 +1,5 @@
-// Importando as bibliotecas necessárias
 const request = require('supertest'); // Usada para fazer requisições para a aplicação
-const app = require('../../../app');
+const app = require('../../app');
 
 // Descrevendo o grupo de testes para o BalanceController
 describe('BalanceController', () => {
