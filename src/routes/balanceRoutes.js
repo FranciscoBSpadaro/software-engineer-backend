@@ -4,6 +4,6 @@ const BalanceController = require('../controllers/BalanceController');
 const router = express.Router();
 
 // Rota para recuperar o saldo
-router.get('/balance', BalanceController.getBalance);
+router.get('/', BalanceController.getBalance);
 
 module.exports = router;

@@ -1,19 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const dbConfig = require('../config/database');
+const { DataTypes } = require('sequelize');
+const db = require('../config/database');
 
-const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
-  host: dbConfig.host,
-  port: dbConfig.port,
-  dialect: 'postgres',
-  pool: {
-    max: dbConfig.max,
-    min: dbConfig.min,
-    acquire: dbConfig.acquire,
-    idle: dbConfig.idle
-  },
-});
 
-const Transaction = sequelize.define('Transaction', {
+const Transaction = db.define('Transaction', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-if (process.env.NODE_ENV !== 'production') {
-  // se ambiente for difente de produção então use o dotenv , no caso de ambiente development
+if (process.env.NODE_ENV !== 'production') { 
+  // se ambiente for difente de produção então use o dotenv , no caso de ambiente 'development'
   require('dotenv').config();
 }
 
@@ -47,7 +47,7 @@ app.use('/payables', payablesRoutes);
 app.use('/balance', balanceRoutes);
 
 // Configuração da porta do servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 // Inicialização do servidor
 app.listen(PORT, () => {

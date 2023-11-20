@@ -4,9 +4,9 @@ const PayablesController = require('../controllers/PayablesController');
 const router = express.Router();
 
 // Rota para criar um registro pagável
-router.post('/payables', PayablesController.create);
+router.post('/', PayablesController.create);
 
 // Rota para recuperar todos os registros pagáveis
-router.get('/payables', PayablesController.getAll);
+router.get('/', PayablesController.getAll);
 
 module.exports = router;
