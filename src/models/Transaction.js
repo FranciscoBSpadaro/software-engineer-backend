@@ -41,4 +41,12 @@ const Transaction = db.define('Transaction', {
   timestamps: true,
 });
 
+db.sync()
+    .then(() => {
+        console.log('🤖 Tabela de Detalhes do Transaction criada com sucesso! ✔');
+    })
+    .catch((error) => {
+        console.error('Erro ao criar tabela de detalhes do Transaction:', error);
+    });
+
 module.exports = Transaction;

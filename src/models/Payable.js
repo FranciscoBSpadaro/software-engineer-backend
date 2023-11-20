@@ -28,4 +28,12 @@ const Payable = db.define('Payable', {
   timestamps: true,
 });
 
+db.sync()
+    .then(() => {
+        console.log('🤖 Tabela de Detalhes do Payable criada com sucesso! ✔');
+    })
+    .catch((error) => {
+        console.error('Erro ao criar tabela de detalhes do Payable:', error);
+    });
+
 module.exports = Payable;

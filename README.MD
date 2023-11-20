@@ -51,9 +51,11 @@ DB_USERNAME=postgres
 DB_PASSWORD=sua_senha_postgres
 NODE_ENV=development
 ```
-6. Execute as migrações com `npm run migrate`
+6. Execute as migrações ' OPCIONAL' com `npm run migrate`
 7. Inicie o servidor com `npm start ou npm run dev`
 8. tambem é possivel excluir as tabelas do db com `npm run drop`
+9. Não é necessário usar o comando de migrações pois está dando erro por não criar os atributos  "createdAt" e  "updatedAt" 
+   - então a solução foi adicionar db.sync nos modelos sequelize que é o ideal para o ambiente de desenvolvimento , mas não é recomendado em produção,  com essa solução basta iniciar o servidor que as tabelas vão sincronizar automaticamente .
 
 ## Como Testar
 

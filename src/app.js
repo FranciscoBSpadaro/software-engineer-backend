@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Configuração do CORS
+/*
 app.use(
   cors({
     origin: 'http://localhost:3001',
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 
 // Usando o middleware Helmet
 app.use(helmet());
+*/
 
 // Configuração do middleware e do body parser
 app.use(express.json());
