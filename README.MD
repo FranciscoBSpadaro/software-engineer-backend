@@ -35,7 +35,12 @@ Processamento de transações com as seguintes informações:
 3. Configure o banco de dados no arquivo `config/database.js`
 4. Execute as migrações com `npx sequelize db:migrate`
 5. Inicie o servidor com `npm start`
-6. Crie seu arquivo .env
+6. Criar um banco de dados PostgreSQL usando Docker, você pode usar a imagem oficial do PostgreSQL do Docker Hub. 
+   - Aqui estão os passos:
+   - Primeiro, você precisa instalar o Docker em seu sistema, se ainda não o fez. Você pode baixá-lo do site oficial do Docker.
+   - Em seguida, você pode executar o seguinte comando no terminal powershell para criar e iniciar um contêiner Docker com PostgreSQL:
+   - docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+7. Crie seu arquivo .env
 ```
 DB_HOST=localhost
 DB_PORT=5432
