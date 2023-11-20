@@ -35,6 +35,14 @@ Processamento de transações com as seguintes informações:
 3. Configure o banco de dados no arquivo `config/database.js`
 4. Execute as migrações com `npx sequelize db:migrate`
 5. Inicie o servidor com `npm start`
+6. Crie seu arquivo .env
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=nome_do_seu_banco_de_dados
+DB_USERNAME=seu_usuario_postgres
+DB_PASSWORD=sua_senha_postgres
+```
 
 ## Como Testar
 
