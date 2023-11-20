@@ -53,6 +53,7 @@ NODE_ENV=development
 ```
 6. Execute as migrações com `npm run migrate`
 7. Inicie o servidor com `npm start ou npm run dev`
+8. tambem é possivel excluir as tabelas do db com `npm run drop`
 
 ## Como Testar
 
@@ -65,6 +66,7 @@ Execute os testes com `npm test`
 - POST `/payables` - para criar um novo payable
 - GET `/payables` - para listar todos os payables
 - GET `/balance` - para consultar o saldo do cliente
+- Rotas disponibilizadas no arquivo insomnia na raiz do projeto
 
 ## Contribuição
 
