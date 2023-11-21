@@ -81,7 +81,45 @@ class PayablesController {
         .json({ message: 'Erro ao recuperar a soma dos pagamentos', error });
     }
   }
-// Método para recuperar o saldo do cliente
+
+  // Método para recuperar a soma dos pagamentos para uma semana específica
+  async getSumForWeek(req, res) {
+    // Pegando a data da query string
+    const { date } = req.query;
+
+    // Verifica se a data é válida
+    if (!Date.parse(date)) {
+      return res.status(400).json({ message: 'Data inválida' });
+    }
+
+    try {
+      // Calcula a data de início e fim da semana
+      let startDate = new Date(date);
+      let endDate = new Date(date);
+      endDate.setDate(startDate.getDate() + 7);
+
+      // Calcula a soma dos pagamentos para a semana
+      const sum = await Payable.sum('amount', {
+        where: {
+          status: 'paid',
+          createdAt: {
+            [Op.gte]: startDate,
+            [Op.lt]: endDate,
+          },
+        },
+      });
+
+      // Retorna a soma dos pagamentos
+      return res.status(200).json({ sum });
+    } catch (error) {
+      // Retorna um erro se algo der errado
+      return res
+        .status(500)
+        .json({ message: 'Erro ao recuperar a soma dos pagamentos', error });
+    }
+  }
+
+  // Método para recuperar o saldo do cliente
   async getBalance(req, res) {
     try {
       // Calcula o saldo disponível

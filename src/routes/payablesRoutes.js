@@ -10,7 +10,9 @@ router.post('/', PayablesController.create);
 router.get('/', PayablesController.getAll);
 
 // Rota para recuperar o saldo do cliente
-router.get('/balance', PayablesController.getBalance);
+router.get('/client-balance', PayablesController.getBalance);
+// Rota para recuperar a soma dos pagamentos para uma semana específica
+router.get('/client-balance-week', PayablesController.getSumForWeek);
 
 // Rota para recuperar a soma dos pagamentos pagos em uma semana
 router.get('/sum', PayablesController.getSum);
