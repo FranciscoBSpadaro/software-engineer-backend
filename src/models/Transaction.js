@@ -20,7 +20,11 @@ const Transaction = db.define('Transaction', {
     type: DataTypes.ENUM('debit_card', 'credit_card'),
     allowNull: false,
   },
-  cardNumber: {
+  cardNumberEncrypted: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  cardLastFourDigits: {
     type: DataTypes.STRING,
     allowNull: false,
   },
