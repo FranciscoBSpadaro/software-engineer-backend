@@ -5,6 +5,10 @@ class BalanceController {
   async getBalance(req, res) {
     // Pegando a data da query string
     const { date } = req.query;
+    // Verifica se a data é válida
+    if (!Date.parse(date)) {
+      return res.status(400).json({ message: 'Data inválida' });
+    }
 
     try {
       // Calculando o saldo disponível

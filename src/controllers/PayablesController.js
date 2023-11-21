@@ -1,17 +1,50 @@
 const Payable = require('../models/Payable');
+const Transaction = require('../models/Transaction');
+const { Op } = require('sequelize');
 
 class PayablesController {
+  // Método para criar um novo registro pagável
   async create(req, res) {
     try {
-      const payable = await Payable.create(req.body);
+      // Busca a transação correspondente
+      const transaction = await Transaction.findByPk(req.body.transactionId);
+      if (!transaction) {
+        return res.status(404).json({ message: 'Transação não encontrada' });
+      }
+
+      // Calcula a taxa de processamento com base no método de pagamento
+      const feePercentage =
+        transaction.paymentMethod === 'debit_card' ? 0.03 : 0.05;
+      // Calcula o valor que será realmente pago
+      const amount = transaction.amount * (1 - feePercentage);
+      // Define o status com base no método de pagamento
+      const status =
+        transaction.paymentMethod === 'debit_card' ? 'paid' : 'waiting_funds';
+      // Define a data de pagamento com base no método de pagamento
+      const paymentDate =
+        transaction.paymentMethod === 'debit_card'
+          ? new Date()
+          : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+      // Cria o registro pagável
+      const payable = await Payable.create({
+        transactionId: transaction.id,
+        status,
+        paymentDate,
+        amount,
+      });
+
+      // Retorna o registro pagável criado
       return res.status(201).json(payable);
     } catch (error) {
+      // Retorna um erro se algo der errado
       return res
         .status(500)
         .json({ message: 'Erro ao criar registro pagável', error });
     }
   }
 
+  // Método para recuperar todos os registros pagáveis
   async getAll(req, res) {
     try {
       const payables = await Payable.findAll();
@@ -23,12 +56,14 @@ class PayablesController {
     }
   }
 
+  // Método para recuperar a soma dos pagamentos realizados na última semana
   async getSum(req, res) {
     try {
       let startDate = new Date(); // A data atual
       let endDate = new Date();
       endDate.setDate(startDate.getDate() + 7); // Uma semana a partir da data atual
 
+      // Calcula a soma dos pagamentos realizados na última semana
       const sum = await Payable.sum('amount', {
         where: {
           status: 'paid',
@@ -44,6 +79,24 @@ class PayablesController {
       return res
         .status(500)
         .json({ message: 'Erro ao recuperar a soma dos pagamentos', error });
+    }
+  }
+// Método para recuperar o saldo do cliente
+  async getBalance(req, res) {
+    try {
+      // Calcula o saldo disponível
+      const available = await Payable.sum('amount', {
+        where: { status: 'paid' },
+      });
+      const waitingFunds = await Payable.sum('amount', {
+        where: { status: 'waiting_funds' },
+      });
+
+      return res.status(200).json({ available, waitingFunds });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: 'Erro ao recuperar o saldo', error });
     }
   }
 }
